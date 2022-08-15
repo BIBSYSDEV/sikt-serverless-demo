@@ -152,7 +152,7 @@ Resources:
           Type: Api
           Properties:
             Method: post
-            Path: /demo
+            Path: /message
             RestApiId: !Ref DemoApi
       Handler: no.unit.nva.bergen.DemoHttpHandler::handleRequest
       Role: !GetAtt LambdaRole.Arn
@@ -278,7 +278,7 @@ Resources:
   InternalBus:
     Type: AWS::Events::EventBus
     Properties:
-      Name: !Join [ '',[ 'resource-service-internal-bus',!Ref Suffix ] ]
+      Name: !Join [ '',[ 'demo-service-internal-bus',!Ref Suffix ] ]
 
   #===========================BasePathMappings========================================================
 
