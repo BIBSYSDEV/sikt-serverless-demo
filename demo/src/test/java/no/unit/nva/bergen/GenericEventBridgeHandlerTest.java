@@ -18,21 +18,20 @@ import nva.commons.core.paths.UnixPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FirstEventBridgeHandlerTest {
+class GenericEventBridgeHandlerTest {
     
     private ByteArrayOutputStream outputStream;
     private Context context;
-    private FakeS3Client s3Client;
     private S3Driver s3Driver;
-    private FirstEventBridgeHandler handler;
+    private GenericEventBridgeHandler handler;
     
     @BeforeEach
     public void setup() {
         this.outputStream = new ByteArrayOutputStream();
         this.context = createFakeContextWithMethodNameAndFunctionArn();
-        this.s3Client = new FakeS3Client();
-        this.s3Driver = new S3Driver(s3Client, "notmportant");
-        this.handler = new FirstEventBridgeHandler(s3Client);
+        var s3Client = new FakeS3Client();
+        this.s3Driver = new S3Driver(s3Client, "notImportant");
+        this.handler = new GenericEventBridgeHandler(s3Client);
     }
     
     @Test

@@ -16,18 +16,18 @@ import nva.commons.logutils.LogUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SecondEventBridgeHandlerTest {
+class LambdaDestinationsEventHandlerTest {
     
     private static final Context CONTEXT = new FakeContext();
     private S3Driver s3Driver;
-    private SecondEventBridgeHandler handler;
+    private LambdaDestinationsEventHandler handler;
     private ByteArrayOutputStream outputStream;
     
     @BeforeEach
     public void setup() {
         var s3Client = new FakeS3Client();
-        this.s3Driver = new S3Driver(s3Client, "notimportant");
-        handler = new SecondEventBridgeHandler(s3Client);
+        this.s3Driver = new S3Driver(s3Client, "notImportant");
+        handler = new LambdaDestinationsEventHandler(s3Client);
         this.outputStream = new ByteArrayOutputStream();
     }
     
@@ -35,7 +35,7 @@ class SecondEventBridgeHandlerTest {
     void shouldLogMessageWhenReceivingANonEmptyMessage() throws IOException {
         var message = new Message(randomString());
         var fileUri = s3Driver.insertEvent(UnixPath.EMPTY_PATH, message.toString());
-        var eventReference = new EventReference(FirstEventBridgeHandler.EVENT_TOPIC, fileUri);
+        var eventReference = new EventReference(GenericEventBridgeHandler.EVENT_TOPIC, fileUri);
         var input =
             EventBridgeEventBuilder.sampleLambdaDestinationsEvent(eventReference);
         var logger = LogUtils.getTestingAppenderForRootLogger();

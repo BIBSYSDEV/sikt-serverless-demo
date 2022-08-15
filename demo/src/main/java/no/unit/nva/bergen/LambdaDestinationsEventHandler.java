@@ -11,17 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.s3.S3Client;
 
-public class SecondEventBridgeHandler extends DestinationsEventBridgeEventHandler<EventReference, Void> {
+public class LambdaDestinationsEventHandler extends DestinationsEventBridgeEventHandler<EventReference, Void> {
     
-    private static final Logger logger = LoggerFactory.getLogger(SecondEventBridgeHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(LambdaDestinationsEventHandler.class);
     private final S3Driver s3Driver;
     
     @JacocoGenerated
-    public SecondEventBridgeHandler() {
+    public LambdaDestinationsEventHandler() {
         this(S3Driver.defaultS3Client().build());
     }
     
-    public SecondEventBridgeHandler(S3Client s3Client) {
+    public LambdaDestinationsEventHandler(S3Client s3Client) {
         super(EventReference.class);
         this.s3Driver = new S3Driver(s3Client, EventsConfig.EVENTS_BUCKET);
     }

@@ -13,17 +13,17 @@ import nva.commons.core.JacocoGenerated;
 import nva.commons.core.paths.UnixPath;
 import software.amazon.awssdk.services.s3.S3Client;
 
-public class FirstEventBridgeHandler extends EventHandler<EventReference, EventReference> {
+public class GenericEventBridgeHandler extends EventHandler<EventReference, EventReference> {
     
     public static final String EVENT_TOPIC = "Demo.Message.Capitalize";
     private final S3Driver s3Driver;
     
     @JacocoGenerated
-    public FirstEventBridgeHandler() {
+    public GenericEventBridgeHandler() {
         this(S3Driver.defaultS3Client().build());
     }
     
-    protected FirstEventBridgeHandler(S3Client s3Client) {
+    protected GenericEventBridgeHandler(S3Client s3Client) {
         super(EventReference.class);
         this.s3Driver = new S3Driver(s3Client, EVENTS_BUCKET);
     }
