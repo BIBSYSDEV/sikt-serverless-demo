@@ -162,7 +162,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
-      Handler: no.unit.nva.bergen.FirstEventBridgeHandler::handleRequest
+      Handler: no.unit.nva.bergen.DemoApiGatewayRestHandler::handleRequest
       Runtime: java11
       Role: !GetAtt LambdaRole.Arn
       Environment:
@@ -188,7 +188,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
-      Handler: no.unit.nva.bergen.SecondEventBridgeHandler::handleRequest
+      Handler: no.unit.nva.bergen.LambdaDestinationsEventHandlerTest::handleRequest
       Runtime: java11
       Role: !GetAtt LambdaRole.Arn
       Environment:
