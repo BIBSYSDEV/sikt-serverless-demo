@@ -3,7 +3,7 @@ info:
   title: NVA Demo API
   version: 1.0.0
 paths:
-  /:
+  /message:
     post:
       summary: Send Message
       requestBody:
