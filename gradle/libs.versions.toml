@@ -21,6 +21,7 @@ nva-s3 = { group = 'com.github.bibsysdev', name = 's3', version.ref = 'nva' }
 nva-apigateway = { group = 'com.github.bibsysdev', name = 'apigateway', version.ref = 'nva' }
 nva-eventhandlers = { group = 'com.github.bibsysdev', name = 'eventhandlers', version.ref = 'nva' }
 nva-testutils = { group = 'com.github.bibsysdev', name = 'nvatestutils', version.ref = 'nva' }
+nva-logutils = { group = 'com.github.bibsysdev', name = 'logutils', version.ref = 'nva' }
 
 jackson-core = { group = 'com.fasterxml.jackson.core', name = 'jackson-core', version.ref = 'jackson' }
 jackson-datatype-jdk8 = { group = 'com.fasterxml.jackson.datatype', name = 'jackson-datatype-jdk8', version.ref = 'jackson' }
@@ -57,7 +58,7 @@ slf4j-api = { group = 'org.slf4j', name = 'slf4j-api', version.ref = 'slf4j' }
 
 [bundles]
 testing = ['junit-jupiter-params', 'junit-jupiter-api', 'junit-jupiter-engine','hamcrest-base',
-    'hamcrest-core', 'hamcrest-jackson', 'nva-testutils', 'zalando']
+    'hamcrest-core', 'hamcrest-jackson', 'nva-testutils', 'zalando','nva-logutils']
 
 logging = ['log4j-core', 'log4j-api', 'log4j-slf4j18-impl', 'slf4j-api']
 jackson = ['jackson-core', 'jackson-datatype-jdk8', 'jackson-datatype-jsr310', 'jackson-databind', 'jackson-annotations', 'jackson-module-parameter-names', 'jackson-datatype-problem']
