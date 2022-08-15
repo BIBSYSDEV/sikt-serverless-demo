@@ -1,14 +1,14 @@
 plugins {
-    id 'nva-demo-api.java-library-conventions'
+    id 'nva-demo-api.java-common-conventions'
 }
 
 allprojects {
-    apply plugin: 'nva-demo-api.java-library-conventions'
+    apply plugin: 'nva-demo-api.java-common-conventions'
 }
 
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = "7.5"
+    gradleVersion = "7.5.1"
 }
 
 

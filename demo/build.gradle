@@ -1,5 +1,5 @@
 plugins {
-    id 'nva-demo-api.java-library-conventions'
+    id 'nva-demo-api.java-common-conventions'
 }
 
 
