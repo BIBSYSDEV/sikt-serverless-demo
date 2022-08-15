@@ -1,0 +1,35 @@
+plugins {
+    id 'nva-demo-api.java-common-conventions'
+}
+
+allprojects {
+    apply plugin: 'nva-demo-api.java-common-conventions'
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = "7.5.1"
+}
+
+
+subprojects {
+    // For using DynamoDB locally
+    configurations.testImplementation.canBeResolved = true
+    task copyNativeDeps(type: Copy) {
+        from(configurations.testImplementation) {
+            include "*.dylib"
+            include "*.so"
+            include "*.dll"
+        }
+        into 'build/dynamodb-local'
+    }
+
+    test {
+        dependsOn copyNativeDeps
+        systemProperty "java.library.path", 'build/dynamodb-local'
+    }
+}
+
+build {
+    dependsOn jacocoRootReport
+}
