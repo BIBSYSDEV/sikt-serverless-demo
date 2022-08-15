@@ -154,7 +154,7 @@ Resources:
             Method: post
             Path: /message
             RestApiId: !Ref DemoApi
-      Handler: no.unit.nva.bergen.DemoHttpHandler::handleRequest
+      Handler: no.unit.nva.bergen.DemoApiGatewayRestHandler::handleRequest
       Role: !GetAtt LambdaRole.Arn
 
   FirstEventBridgeEventHandler:
