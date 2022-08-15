@@ -13,11 +13,8 @@ repositories {
     mavenCentral()
 }
 
-
 test {
-    useJUnitPlatform {
-        excludeTags "RemoteTest", "integrationTest", "KarateTest"
-    }
+    useJUnitPlatform {}
     failFast = false
     testLogging {
         events 'skipped', 'passed', 'failed'
@@ -25,22 +22,14 @@ test {
         exceptionFormat "full"
     }
 
-
     finalizedBy jacocoTestReport
-    //TODO: investigate the usage of a BuildConfig file with BuildConfig plugin
-    environment "API_HOST", "localhost"
-    environment "ID_NAMESPACE", "https://www.example.org"
 }
 
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml.required = true
     }
 }
-
-//gradleLint {
-//    rules = ['unused-dependency']
-//}
 
 pmd {
     ruleSetConfig = rootProject.resources.text.fromFile('config/pmd/ruleset.xml')
@@ -55,8 +44,8 @@ checkstyle {
 
 tasks.withType(Checkstyle) {
     reports {
-        xml.enabled false
-        html.enabled true
+        xml.required = false
+        html.required = true
         html.stylesheet rootProject.resources.text.fromFile('config/checkstyle/checkstyle-simple.xsl')
     }
 }
@@ -82,16 +71,6 @@ jacocoTestCoverageVerification {
             }
         }
     }
-}
-
-// publish submodules
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
 }
 
 
@@ -154,6 +133,6 @@ task jacocoRootReport(type: JacocoReport, dependsOn: tasks.jacocoMerge) {
     }
 
     reports {
-        xml.enabled true
+        xml.required = true
     }
 }
