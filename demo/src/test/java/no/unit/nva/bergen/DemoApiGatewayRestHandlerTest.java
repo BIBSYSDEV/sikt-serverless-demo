@@ -17,16 +17,15 @@ import no.unit.nva.stubs.FakeS3Client;
 import no.unit.nva.testutils.HandlerRequestBuilder;
 import nva.commons.apigateway.GatewayResponse;
 import nva.commons.core.SingletonCollector;
-import nva.commons.core.paths.UriWrapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.services.eventbridge.model.PutEventsRequestEntry;
 
-class DemoHttpHandlerTest {
+class DemoApiGatewayRestHandlerTest {
     
     private ByteArrayOutputStream output;
     private Context context;
-    private DemoHttpHandler handler;
+    private DemoApiGatewayRestHandler handler;
     private FakeEventBridgeClient eventBridgeClient;
     private FakeS3Client s3Client;
     
@@ -36,7 +35,7 @@ class DemoHttpHandlerTest {
         this.context = createFakeContextWithMethodNameAndFunctionArn();
         this.eventBridgeClient = new FakeEventBridgeClient();
         this.s3Client = new FakeS3Client();
-        this.handler = new DemoHttpHandler(eventBridgeClient, s3Client);
+        this.handler = new DemoApiGatewayRestHandler(eventBridgeClient, s3Client);
     }
     
     @Test

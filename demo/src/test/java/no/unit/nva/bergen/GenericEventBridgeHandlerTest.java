@@ -37,7 +37,7 @@ class GenericEventBridgeHandlerTest {
     @Test
     void shouldConsumeEventsWithMessages() throws IOException {
         var firstEventBodyUri = createAlreadyEmittedEventBody();
-        var event = new EventReference(DemoHttpHandler.EVENT_TOPIC, firstEventBodyUri);
+        var event = new EventReference(DemoApiGatewayRestHandler.EVENT_TOPIC, firstEventBodyUri);
         var request = EventBridgeEventBuilder.sampleEvent(event);
         handler.handleRequest(request, outputStream, context);
         var response = EventReference.fromJson(outputStream.toString());
