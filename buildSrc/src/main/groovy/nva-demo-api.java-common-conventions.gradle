@@ -1,14 +1,10 @@
 plugins {
     // Apply the java Plugin to add support for Java.
     id 'java'
-    id 'java-library'
     id 'jacoco'
     id 'checkstyle'
     id 'pmd'
     id 'base'
-    //TODO: use when this is fixed https://github.com/nebula-plugins/gradle-lint-plugin/pull/335
-    //id 'nebula.lint'
-    id 'maven-publish'
 }
 
 group = 'com.github.bibsysdev'
