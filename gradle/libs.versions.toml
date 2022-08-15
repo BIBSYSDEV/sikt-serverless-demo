@@ -1,0 +1,63 @@
+[versions]
+
+nva = { strictly = '1.24.18' }
+jackson = { strictly = '2.13.3' }
+awsSdk = { strictly = '1.12.220' }
+awsSdk2 = { strictly = '2.17.191' }
+log4j = { strictly = '2.17.2' }
+slf4j = { strictly = '1.8.0-beta4' }
+zalandoProblem = { strictly = '0.27.1' }
+awsLambdaCore = { strictly = '1.2.1' }
+awsLambdaEvents = { strictly = '3.9.0' }
+# jsonld and awssdk have different versions. update libraries and check again
+hamcrest = { strictly = '2.2' }
+junit = { strictly = '5.8.2' }
+hamcrestJackson = { strictly = '1.2.0' }
+
+[libraries]
+nva-core = { group = 'com.github.bibsysdev', name = 'core', version.ref = 'nva' }
+nva-json = { group = 'com.github.bibsysdev', name = 'json', version.ref = 'nva' }
+nva-s3 = { group = 'com.github.bibsysdev', name = 's3', version.ref = 'nva' }
+nva-apigateway = { group = 'com.github.bibsysdev', name = 'apigateway', version.ref = 'nva' }
+nva-eventhandlers = { group = 'com.github.bibsysdev', name = 'eventhandlers', version.ref = 'nva' }
+nva-testutils = { group = 'com.github.bibsysdev', name = 'nvatestutils', version.ref = 'nva' }
+
+jackson-core = { group = 'com.fasterxml.jackson.core', name = 'jackson-core', version.ref = 'jackson' }
+jackson-datatype-jdk8 = { group = 'com.fasterxml.jackson.datatype', name = 'jackson-datatype-jdk8', version.ref = 'jackson' }
+jackson-datatype-jsr310 = { group = 'com.fasterxml.jackson.datatype', name = 'jackson-datatype-jsr310', version.ref = 'jackson' }
+jackson-databind = { group = 'com.fasterxml.jackson.core', name = 'jackson-databind', version.ref = 'jackson' }
+jackson-annotations = { group = 'com.fasterxml.jackson.core', name = 'jackson-annotations', version.ref = 'jackson' }
+jackson-module-parameter-names = { group = 'com.fasterxml.jackson.module', name = 'jackson-module-parameter-names', version.ref = 'jackson' }
+jackson-datatype-problem = { group = 'org.zalando', name = 'jackson-datatype-problem', version.ref = 'zalandoProblem' }
+
+aws-lambda-java-core = { group = 'com.amazonaws', name = 'aws-lambda-java-core', version.ref = 'awsLambdaCore' }
+aws-lambda-events = { group = 'com.amazonaws', name = 'aws-lambda-java-events', version.ref = 'awsLambdaEvents' }
+
+aws-sdk2-s3 = { group = 'software.amazon.awssdk', name = 's3', version.ref = 'awsSdk2' }
+aws-core = { group = 'software.amazon.awssdk', name = 'aws-core', version.ref = 'awsSdk2' }
+aws-sdk2-core = { group = 'software.amazon.awssdk', name = 'sdk-core', version.ref = 'awsSdk2' }
+aws-sdk2-eventbridge = { group = 'software.amazon.awssdk', name = 'eventbridge', version.ref = 'awsSdk2' }
+aws-sdk2-regions = { group = 'software.amazon.awssdk', name = 'regions', version.ref = 'awsSdk2' }
+aws-sdk2-urlconnectionclient = { group = 'software.amazon.awssdk', name = 'url-connection-client', version.ref = 'awsSdk2' }
+
+hamcrest-base = { group = 'org.hamcrest', name = 'hamcrest', version.ref = 'hamcrest' }
+hamcrest-core = { group = 'org.hamcrest', name = 'hamcrest-core', version.ref = 'hamcrest' }
+zalando = { group = 'org.zalando', name = 'problem', version.ref = 'zalandoProblem' }
+hamcrest-jackson = { group = 'com.spotify', name = 'hamcrest-jackson', version.ref = 'hamcrestJackson' }
+
+junit-jupiter-params = { group = 'org.junit.jupiter', name = 'junit-jupiter-params', version.ref = 'junit' }
+junit-jupiter-api = { group = 'org.junit.jupiter', name = 'junit-jupiter-api', version.ref = 'junit' }
+junit-jupiter-engine = { group = 'org.junit.jupiter', name = 'junit-jupiter-engine', version.ref = 'junit' }
+
+log4j-core = { group = 'org.apache.logging.log4j', name = 'log4j-core', version.ref = 'log4j' }
+log4j-api = { group = 'org.apache.logging.log4j', name = 'log4j-api', version.ref = 'log4j' }
+log4j-slf4j18-impl = { group = 'org.apache.logging.log4j', name = 'log4j-slf4j18-impl', version.ref = 'log4j' }
+slf4j-api = { group = 'org.slf4j', name = 'slf4j-api', version.ref = 'slf4j' }
+
+
+[bundles]
+testing = ['junit-jupiter-params', 'junit-jupiter-api', 'junit-jupiter-engine','hamcrest-base',
+    'hamcrest-core', 'hamcrest-jackson', 'nva-testutils', 'zalando']
+
+logging = ['log4j-core', 'log4j-api', 'log4j-slf4j18-impl', 'slf4j-api']
+jackson = ['jackson-core', 'jackson-datatype-jdk8', 'jackson-datatype-jsr310', 'jackson-databind', 'jackson-annotations', 'jackson-module-parameter-names', 'jackson-datatype-problem']

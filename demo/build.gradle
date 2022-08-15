@@ -1,0 +1,37 @@
+plugins {
+    id 'nva-demo-api.java-library-conventions'
+}
+
+
+dependencies {
+
+    implementation libs.nva.apigateway
+    implementation libs.nva.core
+    implementation libs.nva.s3
+    implementation libs.nva.eventhandlers
+    implementation libs.nva.json
+    implementation libs.aws.sdk2.s3
+    implementation libs.aws.sdk2.eventbridge
+
+
+    implementation libs.bundles.jackson
+    implementation libs.bundles.logging
+    implementation libs.zalando
+    implementation libs.aws.sdk2.regions
+    implementation libs.aws.sdk2.urlconnectionclient
+
+    testImplementation libs.bundles.testing
+}
+
+test {
+    environment "API_HOST", "api.dev.nva.aws.unit.no"
+    environment "AWS_REGION", "eu-west-1"
+    environment "COGNITO_HOST", "http://example.org"
+    environment "ALLOWED_ORIGIN","*"
+    environment "EVENTS_BUCKET","eventsBucket"
+    environment "EVENT_BUS_NAME","eventsBusName"
+}
+
+
+
+
