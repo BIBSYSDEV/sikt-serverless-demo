@@ -157,12 +157,12 @@ Resources:
       Handler: no.unit.nva.bergen.DemoApiGatewayRestHandler::handleRequest
       Role: !GetAtt LambdaRole.Arn
 
-  GenericEventBridgeHandlerTest:
+  GenericEventBridgeHandler:
     DependsOn: EventsLambdaPermissions
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
-      Handler: no.unit.nva.bergen.GenericEventBridgeHandlerTest::handleRequest
+      Handler: no.unit.nva.bergen.GenericEventBridgeHandler::handleRequest
       Runtime: java11
       Role: !GetAtt LambdaRole.Arn
       Environment:
@@ -183,12 +183,12 @@ Resources:
             Type: EventBridge
             Destination: !GetAtt InternalBus.Arn
 
-  LambdaDestinationsEventHandlerTest:
+  LambdaDestinationsEventHandler:
     DependsOn: EventsLambdaPermissions
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
-      Handler: no.unit.nva.bergen.LambdaDestinationsEventHandlerTest::handleRequest
+      Handler: no.unit.nva.bergen.LambdaDestinationsEventHandler::handleRequest
       Runtime: java11
       Role: !GetAtt LambdaRole.Arn
       Environment:
