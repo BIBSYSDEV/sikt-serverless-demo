@@ -136,7 +136,7 @@ Resources:
           Parameters:
             Location: ./docs/openapi.yaml
 
-  DemoHttpFunction:
+  DemoApiGatewayRestHandler:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
@@ -157,12 +157,12 @@ Resources:
       Handler: no.unit.nva.bergen.DemoApiGatewayRestHandler::handleRequest
       Role: !GetAtt LambdaRole.Arn
 
-  FirstEventBridgeEventHandler:
+  GenericEventBridgeHandlerTest:
     DependsOn: EventsLambdaPermissions
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: demo
-      Handler: no.unit.nva.bergen.DemoApiGatewayRestHandler::handleRequest
+      Handler: no.unit.nva.bergen.GenericEventBridgeHandlerTest::handleRequest
       Runtime: java11
       Role: !GetAtt LambdaRole.Arn
       Environment:
@@ -183,7 +183,7 @@ Resources:
             Type: EventBridge
             Destination: !GetAtt InternalBus.Arn
 
-  SecondEventBridgeEventHandler:
+  LambdaDestinationsEventHandlerTest:
     DependsOn: EventsLambdaPermissions
     Type: AWS::Serverless::Function
     Properties:
