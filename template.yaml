@@ -122,6 +122,22 @@ Resources:
               - sqs:DeleteMessage
             Resource: "*"
 
+  ReadSecretsPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub EventsLambdaPermissions-${AWS::StackName}
+      Roles:
+        - !Ref LambdaRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - secretsmanager:GetSecretValue
+            Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:OrestisSecretName-*"
+
+
+
   DemoApi:
     Type: AWS::Serverless::Api
     Properties:
