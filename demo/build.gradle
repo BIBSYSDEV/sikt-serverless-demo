@@ -7,11 +7,13 @@ dependencies {
 
     implementation libs.nva.apigateway
     implementation libs.nva.core
+    implementation libs.nva.secrets
     implementation libs.nva.s3
     implementation libs.nva.eventhandlers
     implementation libs.nva.json
     implementation libs.aws.sdk2.s3
     implementation libs.aws.sdk2.eventbridge
+    implementation libs.aws.sdk2.secrets
 
 
     implementation libs.bundles.jackson
@@ -30,6 +32,8 @@ test {
     environment "ALLOWED_ORIGIN","*"
     environment "EVENTS_BUCKET","eventsBucket"
     environment "EVENT_BUS_NAME","eventsBusName"
+    environment "APPLICATION_SECRET_NAME","OrestisSecretName"
+    environment "APPLICATION_SECRET_KEY","OrestisSecretKey"
 }
 
 

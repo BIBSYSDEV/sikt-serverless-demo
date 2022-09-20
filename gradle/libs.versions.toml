@@ -1,6 +1,6 @@
 [versions]
 
-nva = { strictly = '1.24.18' }
+nva = { strictly = '1.25.7' }
 jackson = { strictly = '2.13.3' }
 awsSdk = { strictly = '1.12.220' }
 awsSdk2 = { strictly = '2.17.191' }
@@ -22,6 +22,7 @@ nva-apigateway = { group = 'com.github.bibsysdev', name = 'apigateway', version.
 nva-eventhandlers = { group = 'com.github.bibsysdev', name = 'eventhandlers', version.ref = 'nva' }
 nva-testutils = { group = 'com.github.bibsysdev', name = 'nvatestutils', version.ref = 'nva' }
 nva-logutils = { group = 'com.github.bibsysdev', name = 'logutils', version.ref = 'nva' }
+nva-secrets = { group = 'com.github.bibsysdev', name = 'secrets', version.ref = 'nva' }
 
 jackson-core = { group = 'com.fasterxml.jackson.core', name = 'jackson-core', version.ref = 'jackson' }
 jackson-datatype-jdk8 = { group = 'com.fasterxml.jackson.datatype', name = 'jackson-datatype-jdk8', version.ref = 'jackson' }
@@ -40,6 +41,10 @@ aws-sdk2-core = { group = 'software.amazon.awssdk', name = 'sdk-core', version.r
 aws-sdk2-eventbridge = { group = 'software.amazon.awssdk', name = 'eventbridge', version.ref = 'awsSdk2' }
 aws-sdk2-regions = { group = 'software.amazon.awssdk', name = 'regions', version.ref = 'awsSdk2' }
 aws-sdk2-urlconnectionclient = { group = 'software.amazon.awssdk', name = 'url-connection-client', version.ref = 'awsSdk2' }
+
+aws-sdk2-secrets = { group = 'software.amazon.awssdk', name = 'secretsmanager', version.ref = 'awsSdk2' }
+
+
 
 hamcrest-base = { group = 'org.hamcrest', name = 'hamcrest', version.ref = 'hamcrest' }
 hamcrest-core = { group = 'org.hamcrest', name = 'hamcrest-core', version.ref = 'hamcrest' }

@@ -1,75 +1,39 @@
 package no.unit.nva.bergen;
 
 import static java.net.HttpURLConnection.HTTP_ACCEPTED;
-import static no.unit.nva.bergen.EventsConfig.EVENTS_BUCKET;
-import static no.unit.nva.bergen.EventsConfig.EVENT_BUS_NAME;
-import static no.unit.nva.bergen.EventsConfig.defaultEventBridgeClient;
-import static no.unit.nva.s3.S3Driver.defaultS3Client;
-import static nva.commons.core.attempt.Try.attempt;
 import com.amazonaws.services.lambda.runtime.Context;
-import java.net.URI;
-import no.unit.nva.events.models.EventReference;
-import no.unit.nva.s3.S3Driver;
 import nva.commons.apigateway.ApiGatewayHandler;
 import nva.commons.apigateway.RequestInfo;
+import nva.commons.core.Environment;
 import nva.commons.core.JacocoGenerated;
-import nva.commons.core.paths.UnixPath;
-import software.amazon.awssdk.services.eventbridge.EventBridgeClient;
-import software.amazon.awssdk.services.eventbridge.model.PutEventsRequest;
-import software.amazon.awssdk.services.eventbridge.model.PutEventsRequestEntry;
-import software.amazon.awssdk.services.s3.S3Client;
+import nva.commons.secrets.SecretsReader;
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 
-public class DemoApiGatewayRestHandler extends ApiGatewayHandler<Message, Void> {
+public class DemoApiGatewayRestHandler extends ApiGatewayHandler<Void, String> {
     
     public static final String EVENT_TOPIC = "Demo.Message.Http";
-    
-    private final EventBridgeClient eventBridgeClient;
-    private final S3Client s3Client;
+    public static final String SECRET_NAME = new Environment().readEnv("APPLICATION_SECRET_NAME");
+    public static final String SECRET_KEY = new Environment().readEnv("APPLICATION_SECRET_KEY");
+    private final SecretsReader secretsReader;
     
     @JacocoGenerated
     public DemoApiGatewayRestHandler() {
-        this(defaultEventBridgeClient(), defaultS3Client().build());
+        this(SecretsReader.defaultSecretsManagerClient());
     }
     
-    public DemoApiGatewayRestHandler(EventBridgeClient eventBridgeClient, S3Client s3Client) {
-        super(Message.class);
-        this.eventBridgeClient = eventBridgeClient;
-        this.s3Client = s3Client;
-    }
-    
-    @Override
-    protected Void processInput(Message input, RequestInfo requestInfo, Context context) {
-        var event = createEventReferenceForMessage(input);
-        insertEventInEventBridge(context, event);
-        return null;
+    @JacocoGenerated
+    public DemoApiGatewayRestHandler(SecretsManagerClient secretsManagerClient) {
+        super(Void.class);
+        this.secretsReader = new SecretsReader(secretsManagerClient);
     }
     
     @Override
-    protected Integer getSuccessStatusCode(Message input, Void output) {
+    protected String processInput(Void input, RequestInfo requestInfo, Context context) {
+        return secretsReader.fetchSecret(SECRET_NAME, SECRET_KEY);
+    }
+    
+    @Override
+    protected Integer getSuccessStatusCode(Void input, String output) {
         return HTTP_ACCEPTED;
-    }
-    
-    private void insertEventInEventBridge(Context context, EventReference event) {
-        var putEventRequestEntry = PutEventsRequestEntry.builder()
-            .detail(event.toJsonString())
-            .source(context.getFunctionName())
-            .eventBusName(EVENT_BUS_NAME)
-            .detailType("not in use")
-            .resources(context.getInvokedFunctionArn())
-            .build();
-        var putEventRequest = PutEventsRequest.builder()
-            .entries(putEventRequestEntry)
-            .build();
-        eventBridgeClient.putEvents(putEventRequest);
-    }
-    
-    private EventReference createEventReferenceForMessage(Message inputMessage) {
-        var fileUri = persistMessageToEventsS3Bucket(inputMessage);
-        return new EventReference(EVENT_TOPIC, fileUri);
-    }
-    
-    private URI persistMessageToEventsS3Bucket(Message inputMessage) {
-        var s3Driver = new S3Driver(s3Client, EVENTS_BUCKET);
-        return attempt(() -> s3Driver.insertEvent(UnixPath.EMPTY_PATH, inputMessage.toString())).orElseThrow();
     }
 }
